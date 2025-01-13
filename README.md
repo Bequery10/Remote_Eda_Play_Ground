@@ -14,7 +14,7 @@ Before you run, make sure:
 
 For the first time running, chrome browser will be visible so you can login with gmail only for starter
 
-1. Install python if not installed
+1. Install python and pip if not installed
 
 2. Create a virtual environment:
    ```sh
