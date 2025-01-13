@@ -1,6 +1,6 @@
 # EDA Playground Automation
 
-This open source program automates the process of transferring SystemVerilog code from your local machine to EDA Playground and running it there using Selenium.
+This open source program provides a seemingly remote interraction with edaplayground.com for thoese who don't want to open it manually through a browser.
 
 ## Requirements
 
