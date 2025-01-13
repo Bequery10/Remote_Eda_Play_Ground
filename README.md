@@ -15,5 +15,8 @@ This project automates the process of transferring SystemVerilog code from your 
    ```sh
    pip install -r requirements.txt
 
-4. Run main.py
+4. Change the variables within the main function in main.py based on your system and needs
+
+5. Run main.py
+   ```sh
    python3 -u main.py
