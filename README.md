@@ -2,7 +2,7 @@
 
 This project automates the process of transferring SystemVerilog code from your local machine to EDA Playground and running it there using Selenium.
 
-## requirements
+## Requirements
 
 Chrome version 70 or later
 
