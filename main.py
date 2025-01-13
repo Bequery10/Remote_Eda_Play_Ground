@@ -18,7 +18,8 @@ def initialize_driver(user_data_dir, profile_dir):
     options.add_argument("--disable-blink-features=AutomationControlled")
     options.add_experimental_option("excludeSwitches", ["enable-automation"])
     options.add_experimental_option('useAutomationExtension', False)
-    options.add_argument("--headless")  # Add this line to run Chrome in headless mode
+    if(first_time==False):
+        options.add_argument("--headless")  # Add this line to run Chrome in headless mode
     options.add_argument("--disable-gpu")  # Disable GPU acceleration (optional)
     options.add_argument("--window-size=1920,1080")  # Set window size (optional)
 
@@ -101,14 +102,17 @@ def main():
     testbench_path= 'SystemVerilog/Lab3.3-svCode/testbench.sv'
     design_path = 'SystemVerilog/Lab3.3-svCode/design.sv'
 
+    global first_time # To run headless mode only for the first time so you can log in with gmail, set first_time = False after that
+    first_time = True
+
     #--------------------------------------------------
     
     driver = initialize_driver(user_data_dir, profile_dir)
     driver.get('https://www.edaplayground.com')
     
     login_to_google(driver)
-    select_simulator_and_language(driver, language, simulator)
-    
+    select_simulator_and_language(driver, language, simulator)  
+
     while True:
         input_code(driver, 'testbench0', testbench_path)
         input_code(driver, 'design0', design_path)
