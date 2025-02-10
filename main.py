@@ -1,3 +1,4 @@
+from genericpath import isfile
 import os
 import platform
 from time import sleep
@@ -62,6 +63,27 @@ def run_simulation(driver):
     run_button.click()
     WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.CLASS_NAME, 'EXIT')))
 
+def create_new_tab(driver, filename, file_path):
+    tab = driver.find_element(By.ID, 'testbenchTabsAdd')
+    tab.click()
+
+    WebDriverWait(driver, 10).until(
+        EC.visibility_of_element_located((By.ID, 'testbenchAddTabDialog'))
+    )
+    
+    # Enter the filename
+    filename_input = driver.find_element(By.ID, 'testbenchTabName')
+    filename_input.send_keys(filename)
+    
+    # Click the "Create file" button
+    create_button = driver.find_element(By.ID, 'testbenchAddButton')
+    create_button.click()
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, f'//*[@href="#testbench1"]')))
+        
+    input_code(driver, 'testbench1', file_path)
+
+    
+
 def print_results(driver):
     stdout_elements = driver.find_elements(By.CLASS_NAME, 'STDOUT')
     command_elements = driver.find_elements(By.CLASS_NAME, 'COMMAND')
@@ -99,8 +121,9 @@ def main():
     language = "SystemVerilog/Verilog"
     simulator = "Aldec Riviera Pro 2023.04"
 
-    testbench_path= 'SystemVerilog/Lab3.3-svCode/testbench.sv'
-    design_path = 'SystemVerilog/Lab3.3-svCode/design.sv'
+    testbench_path= 'SystemVerilog/Lab3.2-svCode/testbench.sv'
+    design_path = 'SystemVerilog/Lab3.2-svCode/design.sv'
+    hexfile_path = 'SystemVerilog/Lab3.2-svCode/hexfile.dat'
 
     global first_time # To run headless mode only for the first time so you can log in with gmail, set first_time = False after that
     first_time = True
@@ -111,12 +134,18 @@ def main():
     driver.get('https://www.edaplayground.com')
     
     login_to_google(driver)
+    WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.ID, 'testbenchLanguage')))
     select_simulator_and_language(driver, language, simulator)  
 
     while True:
         input_code(driver, 'testbench0', testbench_path)
         input_code(driver, 'design0', design_path)
-        
+
+        if isfile('hexfile_path'):
+            create_new_tab(driver, 'hexfile.dat', hexfile_path)
+
+            WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, f'//*[@href="#testbench1"]')))
+
         run_simulation(driver)
         print_results(driver)
 
