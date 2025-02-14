@@ -126,7 +126,7 @@ def main():
     hexfile_path = 'SystemVerilog/Lab3.2-svCode/hexfile.dat'
 
     global first_time # To run headless mode only for the first time so you can log in with gmail, set first_time = False after that
-    first_time = True
+    first_time = False
 
     #--------------------------------------------------
     
@@ -141,7 +141,7 @@ def main():
         input_code(driver, 'testbench0', testbench_path)
         input_code(driver, 'design0', design_path)
 
-        if isfile('hexfile_path'):
+        if os.path.isfile(hexfile_path):
             create_new_tab(driver, 'hexfile.dat', hexfile_path)
 
             WebDriverWait(driver, 60).until(EC.presence_of_element_located((By.XPATH, f'//*[@href="#testbench1"]')))
