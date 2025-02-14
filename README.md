@@ -10,9 +10,9 @@ Chrome version 70 or later
 
 Before you run, make sure:
    No other chrome session is open,
-   Refer to the default variables or change them based on your needs in main.py starting from line 98 (make sure names are exactly as in edaplayground.com)
+   Refer to the default variables or change them based on your needs in main.py between the lines 124 and 130 (make sure names are exactly as in edaplayground.com)
 
-For the first time running, chrome browser will be visible so you can login with gmail only for starter
+For the first time running, chrome browser will be visible so you can login with gmail only for the starter
 
 1. Install python and pip if not installed
 
